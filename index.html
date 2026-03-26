@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Special Offer</title>
+</head>
+<body style="text-align:center; font-family:Arial; margin-top:50px;">
+
+<h2>🎁 Check Offers Near You</h2>
+<button onclick="getLocation()">See Offers</button>
+
+<p id="output"></p>
+
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    document.getElementById("output").innerHTML = "Not supported";
+  }
+}
+
+function showPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+
+  document.getElementById("output").innerHTML =
+    "📍 Your Location:<br>" +
+    "Latitude: " + lat + "<br>Longitude: " + lon + "<br><br>" +
+    "<a target='_blank' href='https://www.google.com/maps?q=" + lat + "," + lon + "'>Open in Google Maps</a>";
+}
+
+function showError(error) {
+  document.getElementById("output").innerHTML =
+    "❌ Location access denied";
+}
+</script>
+
+</body>
+</html>

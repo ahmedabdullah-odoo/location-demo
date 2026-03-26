@@ -23,8 +23,18 @@ function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
+  // 🔥 إرسال البيانات للـ Google Sheet
+  fetch("https://script.google.com/macros/s/AKfycbwupNgq5ozs1Tvm8x4fCQZL4viiXCcrOX1tCpfxhz7YpaM6vn1X0_bEoT-zw3e4WKTotg/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      lat: lat,
+      lon: lon
+    })
+  });
+
+  // عرض البيانات على الصفحة
   document.getElementById("output").innerHTML =
-    "📍 Your Location:<br>" +
+    "📍 Location captured & saved ✔️<br><br>" +
     "Latitude: " + lat + "<br>Longitude: " + lon + "<br><br>" +
     "<a target='_blank' href='https://www.google.com/maps?q=" + lat + "," + lon + "'>Open in Google Maps</a>";
 }
